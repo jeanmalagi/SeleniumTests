@@ -19,7 +19,7 @@ public class LoginPage extends BasePage {
     }
 
     public void entrar(){
-        clicarBotao(String.valueOf(By.xpath("//button[.='Entrar']")));
+        clicarBotao(By.xpath("//button[.='Entrar']"));
     }
 
     public void logar(String email, String senha) {
@@ -29,4 +29,3 @@ public class LoginPage extends BasePage {
     }
 
 }
-
