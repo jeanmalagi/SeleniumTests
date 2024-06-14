@@ -1,5 +1,7 @@
 package br.com.selenium.core;
 
+import static br.com.selenium.core.DriverFactory.getDriver;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-
-import static br.com.selenium.core.DriverFactory.getDriver;
 
 public class BasePage {
 
@@ -110,6 +110,9 @@ public class BasePage {
     public void clicarBotao(By by) {
         getDriver().findElement(by).click();
     }
+    public void clicarBotao(String id) {
+        clicarBotao(By.id(id));
+    }
 
     public String obterValueElemento(String id) {
         return getDriver().findElement(By.id(id)).getAttribute("value");
@@ -183,9 +186,9 @@ public class BasePage {
 
     /************** Tabela *********************/
 
-    public void clicarBotaoTabela(String colunaBusca, String valor, String colunaBotao, String idTabela){
+    public WebElement obterCelula(String colunaBusca, String valor, String colunaBotao, String idTabela){
         //procurar coluna do registro
-        WebElement tabela = getDriver().findElement(By.xpath("//*[@id='elementosForm:tableUsuarios']"));
+        WebElement tabela = getDriver().findElement(By.xpath("//*[@id='"+idTabela+"']"));
         int idColuna = obterIndiceColuna(colunaBusca, tabela);
 
         //encontrar a linha do registro
@@ -196,6 +199,11 @@ public class BasePage {
 
         //clicar no botao da celula encontrada
         WebElement celula = tabela.findElement(By.xpath(".//tr["+idLinha+"]/td["+idColunaBotao+"]"));
+        return celula;
+    }
+
+    public void clicarBotaoTabela(String colunaBusca, String valor, String colunaBotao, String idTabela){
+        WebElement celula = obterCelula(colunaBusca, valor, colunaBotao, idTabela);
         celula.findElement(By.xpath(".//input")).click();
 
     }
@@ -224,4 +232,3 @@ public class BasePage {
         return idColuna;
     }
 }
-
