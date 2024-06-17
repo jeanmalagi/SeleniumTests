@@ -53,10 +53,10 @@ public class MovimentacaoTest extends BaseTest {
 
         movPage.setDataMovimentacao(obterDataFormatada(dataFutura));
         movPage.setDataPagamento(obterDataFormatada(dataFutura));
-        movPage.setDescricao("Movimentação do Teste");
+        movPage.setDescricao("Movimentação de Teste");
         movPage.setInteressado("Interessado Qualquer");
         movPage.setValor("500");
-        movPage.setConta("Conta do Teste alterada");
+        movPage.setConta("Conta 1 alterada");
         movPage.setStatusPago();
         movPage.salvar();
 
